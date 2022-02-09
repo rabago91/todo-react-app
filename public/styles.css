@@ -27,7 +27,7 @@ ol {
   counter-reset: gradient-counter;
   list-style: none;
   margin-top: 1.75rem ;
-  margin-bottom: 1rem ;
+  margin-bottom: 6rem ;
   padding-left: 1rem;
 }
 ol > li{
@@ -42,7 +42,6 @@ ol > li{
 
 .handleButtons{
   display: inline-block;
-  /* margin-top: .7rem; */
 }
 
 button{
@@ -52,6 +51,16 @@ button{
   border: 0px solid;
   margin-left: 1rem;
   margin-bottom: 1rem ;
+  bottom: 0;
+}
+
+.trash-button{
+  position: relative;
+  bottom: -0.25rem;
+}
+
+.trash_icon{
+  width: 60%;
 }
 
 input[type=text], #message {
@@ -73,7 +82,18 @@ input[type=text] {
 
 #message{
   font-style: italic;
-  color: #83e4e2;
+  color: darkseagreen;
+}
+
+.new-task-bar{
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+    padding-top: 1rem;
+    padding-left: 1rem;
 }
 
 .task{

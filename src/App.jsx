@@ -56,10 +56,14 @@ export function App() {
         <Fragment>
             <InitialMessage todos={todos}/>
             <TodoList todos={todos} toggleTodo={toggleTodo}/>
-            <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
-            <div className="handleButtons">
-                <button onClick={handleTodoAdd}>➕</button>
-                <button onClick={handleClearAll}>🗑️</button>
+            <div className="new-task-bar">
+                <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
+                <div className="handleButtons">
+                    <button onClick={handleTodoAdd}>➕</button>
+                    <button className="trash-button" onClick={handleClearAll}>
+                        <img className="trash_icon" src="trash-can-icon.png" alt="" />
+                    </button>
+                </div>
             </div>
         </Fragment>
     );
