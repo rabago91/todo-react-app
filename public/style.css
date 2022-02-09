@@ -90,6 +90,7 @@ ol > li::before, ol > li::after {
   position: absolute;
   top: -1rem;
   width: 3rem;
+  word-wrap: break-word;
 }
 ol > li::before {
   align-items: flex-end;
