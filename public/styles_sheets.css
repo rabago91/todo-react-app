@@ -26,7 +26,7 @@ main {
 ol {
   counter-reset: gradient-counter;
   list-style: none;
-  margin-top: 1.75rem ;
+  margin-top: 5.5rem ;
   margin-bottom: 6rem ;
   padding-left: 1rem;
 }
@@ -63,13 +63,13 @@ button{
   width: 60%;
 }
 
-input[type=text], #message {
+input[type=text], #message-bar {
   background: white;
   border-radius: 0 0.5rem 0.5rem 0.5rem;
   counter-increment: gradient-counter;
   margin-left: 1rem;
   margin-bottom: 1rem ;
-  min-height: 3rem;
+  /* min-height: 3rem; */
   padding: 1rem 1rem 1rem 3rem;
   position: relative;
   border: 0px solid;
@@ -80,9 +80,31 @@ input[type=text] {
   max-width: 90%;
 }
 
-#message{
+input:focus {
+  border: 1px solid transparent
+}
+
+#message-bar{
+  position:fixed;
+  width: calc(100% - 2rem);
+  left: 0;
+  top: 0;
   font-style: italic;
+  z-index: 100;
   color: darkseagreen;
+}
+
+#completed{
+  position: absolute;
+  max-width: 50%;
+  right: 2rem;
+  top: .7rem;
+}
+#to-complete{
+  margin-right: 5rem;
+  /* position: absolute;
+  left: 2rem;
+  top: .7rem; */
 }
 
 .new-task-bar{

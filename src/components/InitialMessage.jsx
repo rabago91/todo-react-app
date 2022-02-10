@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function InitialMessage({ todos }) {
+export function InitialMessage({ todos, getPrevCompletedTasksNumber }) {
 
     const getMissingTodos = () => {
         return todos.filter((todo) => !todo.completed).length;
@@ -17,8 +17,13 @@ export function InitialMessage({ todos }) {
     };
 
     const text = textMessageValidation()
+    const completedText = `🏆 ${getPrevCompletedTasksNumber()} `
 
     return (
-        <div id='message'>{text}</div>
+            <div id='message-bar'>
+                <div id='to-complete'>{text}</div>
+                <div id='completed'> {completedText}</div>
+            </div>
+
     )
 }

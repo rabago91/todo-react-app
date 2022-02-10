@@ -4,10 +4,11 @@ import { TodoList } from "./components/TodoList";
 import { InitialMessage } from "./components/InitialMessage";
 
 const KEY = "todoApp.todos";
+const COMPLETEDTASKSKEY = "todoApp.completedTasks";
 
 export function App() {
     const [todos, setTodos] = useState([
-        { id: 1, task: 'Crea escribe tus Tareas', completed: false},
+        { id: 1, task: 'Escribe tus Tareas por hacer', completed: false},
     ]);
 
     const todoTaskRef = useRef();
@@ -17,11 +18,27 @@ export function App() {
         if (storedTodos) {
             setTodos(storedTodos);
         }
+        if (!!!getPrevCompletedTasksNumber()) {
+            localStorage.setItem(COMPLETEDTASKSKEY, JSON.stringify(0));
+        }
     }, []);
 
     useEffect(() => {
         localStorage.setItem(KEY, JSON.stringify(todos))
     }, [todos]);
+
+    const getPrevCompletedTasksNumber = () => {
+        return JSON.parse(localStorage.getItem(COMPLETEDTASKSKEY))
+    }
+
+    const setCompletedTasks = (completedTasksNumber) => {
+        var prevCompletedTasks = 0;
+        if (!!getPrevCompletedTasksNumber()) {
+            prevCompletedTasks = getPrevCompletedTasksNumber()
+        }
+        const completedTasks = prevCompletedTasks + completedTasksNumber;
+        localStorage.setItem(COMPLETEDTASKSKEY, JSON.stringify(completedTasks));
+    }
 
     const toggleTodo = (id) => {
         const newTodos = [...todos];
@@ -39,10 +56,12 @@ export function App() {
         })
 
         todoTaskRef.current.value = null;
-    };
+    }
 
     const handleClearAll = () => {
         const newTodos = todos.filter((todo) => !todo.completed);
+        const clearedNumber = todos.length - newTodos.length
+        setCompletedTasks(clearedNumber);
         setTodos(newTodos);
     }
 
@@ -54,7 +73,9 @@ export function App() {
 
     return (
         <Fragment>
-            <InitialMessage todos={todos}/>
+            <div>
+                <InitialMessage todos={todos} getPrevCompletedTasksNumber={getPrevCompletedTasksNumber}/>
+            </div>
             <TodoList todos={todos} toggleTodo={toggleTodo}/>
             <div className="new-task-bar">
                 <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
