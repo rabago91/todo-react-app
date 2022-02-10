@@ -69,7 +69,6 @@ input[type=text], #message-bar {
   counter-increment: gradient-counter;
   margin-left: 1rem;
   margin-bottom: 1rem ;
-  /* min-height: 3rem; */
   padding: 1rem 1rem 1rem 3rem;
   position: relative;
   border: 0px solid;
@@ -95,16 +94,15 @@ input:focus {
 }
 
 #completed{
+  top: 0;
+  width: 4rem;
+  height: 100%;
   position: absolute;
-  max-width: 50%;
-  right: 2rem;
-  top: .7rem;
+  right: 0rem;
+  padding-top: 1rem;
 }
 #to-complete{
   margin-right: 5rem;
-  /* position: absolute;
-  left: 2rem;
-  top: .7rem; */
 }
 
 .new-task-bar{
