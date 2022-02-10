@@ -140,6 +140,7 @@ ol > li::before {
   font: 900 1.5em/1 'Montserrat';
   justify-content: flex-end;
   padding: 0.125em 0.25em;
+  overflow-wrap: break-word;
   z-index: 1;
 }
 ol > li:nth-child(10n+1):before {
