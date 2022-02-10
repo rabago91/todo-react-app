@@ -38,6 +38,7 @@ ol > li{
   min-height: 3rem;
   padding: 1rem 1rem 1rem 3rem;
   position: relative;
+  word-wrap: break-word;
 }
 
 .handleButtons{
