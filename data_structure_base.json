@@ -18,56 +18,41 @@
                 "kind": 0,
                 "style": 0
             },
-            "tasks": {
-                "completed": [
-                    {
-                        "id": "task_id",
-                        "text": "task_text",
-                        "isCompleted": true,
-                        "description": "task_description",
-                        "projectId": "project_id",
-                        "tags": [
-                            {
-                                "tagId": "tag_id",
-                                "tagName": "tag_name"
-                            }
-                        ],
-                        "dates": {
-                            "creation": "creation_date",
-                            "complete": [
-                                "completed_date"
-                            ],
-                            "restore": [
-                                "restored_date"
-                            ]
-                        }
-                    }
+            "dates": {
+                "creation": "creation_date",
+                "due": "due_date",
+                "complete": [
+                    "completed_date"
                 ],
-                "incomplete": [
-                    {
-                        "id": "task_id",
-                        "text": "task_text",
-                        "isCompleted": false,
-                        "description": "task_description",
-                        "projectId": "project_id",
-                        "tags": [
-                            {
-                                "id": "tag_id",
-                                "name": "tag_name"
-                            }
-                        ],
-                        "dates": {
-                            "creation": "creation_date",
-                            "complete": [
-                                "completed_date"
-                            ],
-                            "restore": [
-                                "restored_date"
-                            ]
-                        }
-                    }
+                "restore": [
+                    "restored_date"
                 ]
-            }
+            },
+            "tasks": [
+                {
+                    "id": "task_id",
+                    "text": "task_text",
+                    "isCompleted": true,
+                    "description": "task_description",
+                    "projectId": "project_id",
+                    "tags": [
+                        {
+                            "tagId": "tag_id",
+                            "tagName": "tag_name"
+                        }
+                    ],
+                    "dates": {
+                        "creation": "creation_date",
+                        "due": "due_date",
+                        "complete": [
+                            "completed_date"
+                        ],
+                        "restore": [
+                            "restored_date"
+                        ]
+                    }
+                }
+            ]
         }
     ],
     "tags": [
@@ -81,45 +66,23 @@
     ],
     "selfRewardsItems": [
         {
-            "created": [
-                {
-                    "id": "id",
-                    "name": "name",
-                    "copyOf": "original_reward_id",
-                    "description": "description",
-                    "cost": 0,
-                    "isPurchased": false,
-                    "dates": {
-                        "creation": "creation_date",
-                        "redemption": "redemption_date"
-                    },
-                    "media": {
-                        "imgSrc": "img_src",
-                        "audioSrc": "audio_src"
-                    }
-                }
-            ],
-            "redemed": [
-                {
-                    "id": "id",
-                    "name": "name",
-                    "copyOf": "original_reward_id",
-                    "description": "description",
-                    "cost": 0,
-                    "isPurchased": true,
-                    "dates": {
-                        "creation": "creation_date",
-                        "redemption": "redemption_date"
-                    },
-                    "media": {
-                        "imgSrc": "img_src",
-                        "audioSrc": "audio_src"
-                    }
-                }
-            ]
+            "id": "id",
+            "name": "name",
+            "copyOf": "original_reward_id",
+            "description": "description",
+            "cost": 0,
+            "isRedeemed": false,
+            "dates": {
+                "creation": "creation_date",
+                "redemption": "redemption_date"
+            },
+            "media": {
+                "imgSrc": "img_src",
+                "audioSrc": "audio_src"
+            }
         }
     ],
-    "customMotivationPhrases": [
+    "customPhrases": [
         {
             "phrase": "más vale intentarlo que vivir con la duda.",
             "Author": "author"
