@@ -2,14 +2,15 @@ import React, {Fragment, useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { TodoList } from "./components/TodoList";
 import { InitialMessage } from "./components/InitialMessage";
+import jsonBase from "./structure_test.json"
 
-const KEY = "todoApp.todos";
-const COMPLETEDTASKSKEY = "todoApp.completedTasks";
+const KEY = "todoApp.todosX";
+const COMPLETEDTASKSKEY = "todoApp.completedTaskss4";
 
 export function App() {
-    const [todos, setTodos] = useState([
-        { id: 1, task: 'Escribe tus Tareas por hacer', completed: false},
-    ]);
+    const [todos, setTodos] = useState(
+        jsonBase
+    );
 
     const todoTaskRef = useRef();
 
@@ -41,10 +42,13 @@ export function App() {
     }
 
     const toggleTodo = (id) => {
-        const newTodos = [...todos];
-        const todo = newTodos.find((todo) => todo.id === id);
+        const newTodos = {
+            ...todos
+        };
+        const todo = newTodos.tasks.find((todo) => todo.id === id);
         todo.completed = !todo.completed;
         setTodos(newTodos);
+
     }
 
     const handleTodoAdd = () => {
@@ -52,17 +56,26 @@ export function App() {
         if (task === '') return;
 
         setTodos((prevTodos) => {
-            return [...prevTodos, {id: uuidv4(), task, completed: false}]
+            const updatedTodos = {
+                ...prevTodos
+            };
+            const newTasks = [...updatedTodos.tasks, {id: uuidv4(), task, completed: false}];
+            updatedTodos.tasks = newTasks;
+            return updatedTodos
         })
 
         todoTaskRef.current.value = null;
     }
 
     const handleClearAll = () => {
-        const newTodos = todos.filter((todo) => !todo.completed);
-        const clearedNumber = todos.length - newTodos.length
+        const updatedTodos = {
+            ...todos
+        };
+        const newTodos = updatedTodos.tasks.filter((todo) => !todo.completed);
+        updatedTodos.tasks = newTodos;
+        const clearedNumber = todos.tasks.length - newTodos.length
         setCompletedTasks(clearedNumber);
-        setTodos(newTodos);
+        setTodos(updatedTodos);
     }
 
     const _handleKeyDown = (e) => {
@@ -74,9 +87,9 @@ export function App() {
     return (
         <Fragment>
             <div>
-                <InitialMessage todos={todos} getPrevCompletedTasksNumber={getPrevCompletedTasksNumber}/>
+                <InitialMessage todos={todos.tasks} getPrevCompletedTasksNumber={getPrevCompletedTasksNumber}/>
             </div>
-            <TodoList todos={todos} toggleTodo={toggleTodo}/>
+            <TodoList todos={todos.tasks} toggleTodo={toggleTodo}/>
             <div className="new-task-bar">
                 <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
                 <div className="handleButtons">
