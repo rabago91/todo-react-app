@@ -9,22 +9,31 @@ export function InitialMessage({ todos, getPrevCompletedTasksNumber }) {
     const textMessageValidation = () => {
         const missingTodosNumber = getMissingTodos();
         if (missingTodosNumber === 0) {
-            return `No tienes tareas pendientes! 🏆 🕶`
+            const icon = <span role="img" aria-label="glasses"> 🕶</span>
+            return <>No tienes tareas pendientes! {icon}</>
         } else if ( missingTodosNumber === 1 ) {
-            return `Te queda ${missingTodosNumber} tarea por terminar ✨`
+            const icon = <span role="img" aria-label="sparkle">✨</span>
+            return <>Te queda 1 tarea por terminar {icon}</>
         } else {
-            return `Te quedan ${missingTodosNumber} tareas por terminar 👀`
+            const icon = <span role="img" aria-label="eyes">👀</span>
+            return <>Te quedan {missingTodosNumber} tareas por terminar {icon}</>
         }
     };
 
-    const text = textMessageValidation()
-    const completedText = `🏆 ${getPrevCompletedTasksNumber()} `
+
+    const completedTextIcon = () => {
+         return (
+             <>
+             <span role="img" aria-label="Trophy">🏆</span> {getPrevCompletedTasksNumber()}
+             </>
+         )
+    }
+    const completedText = completedTextIcon()
 
     return (
             <div id='message-bar'>
-                <div id='to-complete'>{text}</div>
+                <div id='to-complete'>{textMessageValidation()}</div>
                 <div id='completed'> {completedText}</div>
             </div>
-
     )
 }

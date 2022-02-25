@@ -4,8 +4,7 @@ import { TodoList } from "./components/TodoList";
 import { InitialMessage } from "./components/InitialMessage";
 import jsonBase from "./structure_test.json"
 
-const KEY = "todoApp.todosX";
-const COMPLETEDTASKSKEY = "todoApp.completedTaskss4";
+const KEY = "todoApp.todos1984.";
 
 export function App() {
     const [todos, setTodos] = useState(
@@ -19,9 +18,6 @@ export function App() {
         if (storedTodos) {
             setTodos(storedTodos);
         }
-        if (!!!getPrevCompletedTasksNumber()) {
-            localStorage.setItem(COMPLETEDTASKSKEY, JSON.stringify(0));
-        }
     }, []);
 
     useEffect(() => {
@@ -29,16 +25,22 @@ export function App() {
     }, [todos]);
 
     const getPrevCompletedTasksNumber = () => {
-        return JSON.parse(localStorage.getItem(COMPLETEDTASKSKEY))
+        const todosCopy = {
+            ...todos
+        }
+        return todosCopy.credits.completedTasksCredits
     }
 
     const setCompletedTasks = (completedTasksNumber) => {
-        var prevCompletedTasks = 0;
-        if (!!getPrevCompletedTasksNumber()) {
-            prevCompletedTasks = getPrevCompletedTasksNumber()
-        }
+        const prevCompletedTasks = getPrevCompletedTasksNumber();
         const completedTasks = prevCompletedTasks + completedTasksNumber;
-        localStorage.setItem(COMPLETEDTASKSKEY, JSON.stringify(completedTasks));
+        setTodos((prevTodos) => {
+            const updatedCompletedTasksNumber = {
+                ...prevTodos
+            };
+            updatedCompletedTasksNumber.credits.completedTasksCredits = completedTasks;
+            return updatedCompletedTasksNumber
+        })
     }
 
     const toggleTodo = (id) => {
@@ -93,7 +95,9 @@ export function App() {
             <div className="new-task-bar">
                 <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
                 <div className="handleButtons">
-                    <button onClick={handleTodoAdd}>➕</button>
+                    <button onClick={handleTodoAdd}>
+                        <span role="img" aria-label="Plus">➕</span>
+                    </button>
                     <button className="trash-button" onClick={handleClearAll}>
                         <img className="trash_icon" src="trash-can-icon.png" alt="" />
                     </button>
