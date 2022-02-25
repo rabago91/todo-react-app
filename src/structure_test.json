@@ -1,14 +1,53 @@
 {
-    "id": 2,
+    "userData": {
+        "id": "1991",
+        "firstName": "user_first_name",
+        "lastName": "user_last_name",
+        "email": "user_email"
+    },
     "credits": {
         "completedTasksCredits": 0,
         "spentCompletedTasksCredits": 0
     },
+    "tags": [
+        {
+            "id": "1948",
+            "name": "tag_name",
+            "description": "tag_description",
+            "creationDate": "creation_date",
+            "color": "#ff7f50"
+        }
+    ],
+    "selfRewardsItems": [
+        {
+            "id": "1988",
+            "name": "name",
+            "copyOf": "original_reward_id",
+            "description": "description",
+            "cost": 0,
+            "isRedeemed": false,
+            "dates": {
+                "creation": "creation_date",
+                "redemption": "redemption_date"
+            },
+            "media": {
+                "imgSrc": "img_src",
+                "audioSrc": "audio_src"
+            }
+        }
+    ],
+    "customPhrases": [
+        {
+            "id": "2000",
+            "phrase": "más vale intentarlo que vivir con la duda.",
+            "Author": "author"
+        }
+    ],
     "tasks":[
         {
             "id" : 1984,
             "task": "Agrega tus propias tareas",
-            "completed" : false
+            "isCompleted" : false
         }
     ]
 }

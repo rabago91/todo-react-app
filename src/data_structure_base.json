@@ -31,7 +31,7 @@
             "tasks": [
                 {
                     "id": "task_id",
-                    "text": "task_text",
+                    "task": "task_text",
                     "isCompleted": true,
                     "description": "task_description",
                     "projectId": "project_id",
@@ -57,7 +57,7 @@
     ],
     "tags": [
         {
-            "id": "tag_id",
+            "id": "1948",
             "name": "tag_name",
             "description": "tag_description",
             "creationDate": "creation_date",
@@ -66,7 +66,7 @@
     ],
     "selfRewardsItems": [
         {
-            "id": "id",
+            "id": "1988",
             "name": "name",
             "copyOf": "original_reward_id",
             "description": "description",
@@ -84,6 +84,7 @@
     ],
     "customPhrases": [
         {
+            "id": "2000",
             "phrase": "más vale intentarlo que vivir con la duda.",
             "Author": "author"
         }

@@ -4,7 +4,8 @@ import { TodoList } from "./components/TodoList";
 import { InitialMessage } from "./components/InitialMessage";
 import jsonBase from "./structure_test.json"
 
-const KEY = "todoApp.todos1984.";
+const KEY = "todoApp.todos1";
+// const currentProjectId = 1984;
 
 export function App() {
     const [todos, setTodos] = useState(
@@ -48,7 +49,7 @@ export function App() {
             ...todos
         };
         const todo = newTodos.tasks.find((todo) => todo.id === id);
-        todo.completed = !todo.completed;
+        todo.isCompleted = !todo.isCompleted;
         setTodos(newTodos);
 
     }
@@ -61,7 +62,7 @@ export function App() {
             const updatedTodos = {
                 ...prevTodos
             };
-            const newTasks = [...updatedTodos.tasks, {id: uuidv4(), task, completed: false}];
+            const newTasks = [...updatedTodos.tasks, {id: uuidv4(), task, isCompleted: false}];
             updatedTodos.tasks = newTasks;
             return updatedTodos
         })
@@ -73,7 +74,7 @@ export function App() {
         const updatedTodos = {
             ...todos
         };
-        const newTodos = updatedTodos.tasks.filter((todo) => !todo.completed);
+        const newTodos = updatedTodos.tasks.filter((todo) => !todo.isCompleted);
         updatedTodos.tasks = newTodos;
         const clearedNumber = todos.tasks.length - newTodos.length
         setCompletedTasks(clearedNumber);
