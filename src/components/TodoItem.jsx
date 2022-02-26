@@ -1,7 +1,7 @@
 import React from 'react';
 
 export function TodoItem({ todo, toggleTodo }) {
-    const {id, task, completed } = todo
+    const {id, task, isCompleted } = todo
 
     const handleTodoClick = () => {
         toggleTodo(id);
@@ -9,7 +9,7 @@ export function TodoItem({ todo, toggleTodo }) {
 
     return (
         <li>
-            <input type="checkbox" checked={completed} onChange={handleTodoClick} />
+            <input type="checkbox" checked={isCompleted} onChange={handleTodoClick} />
             <div className='task'>{task}</div>
         </li>
     );

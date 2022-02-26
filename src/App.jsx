@@ -23,6 +23,7 @@ export function App() {
 
     useEffect(() => {
         localStorage.setItem(KEY, JSON.stringify(todos))
+        // console.log("----> Storing TODOS");
     }, [todos]);
 
     const getProjectArrayNumber = (projectId) => {
@@ -69,8 +70,7 @@ export function App() {
     }
 
     const handleTodoAdd = () => {
-        console.log("todos inside handleTodoAdd ----------------->", todos);
-        // console.log("getProjectArrayNumber(): ",getProjectArrayNumber());
+        // console.log("todos inside handleTodoAdd ----------------->", todos);
         const task = todoTaskRef.current.value;
         if (task === '') return;
 
@@ -91,16 +91,10 @@ export function App() {
         const updatedTodos = {
             ...todos
         };
-        const newTodos = updatedTodos.projects[projectArrayNumber].tasks.filter((todo) => !todo.isCompleted);
-        updatedTodos.projects[projectArrayNumber].tasks = newTodos;
-        const oldTodos = todos.projects[0].tasks.length;
-        const clearedNumber = oldTodos - newTodos.length;
-        // const clearedNumber = thisProjectTodosRef().length - newTodos.length
-        setAddCompletedTasks(clearedNumber);
-        console.log("--------const clearedNumber = thisProjectTodosRef().length - newTodos.length--------: ", clearedNumber);
-        console.log("oldTodos: todos.projects[0].tasks.length", oldTodos);
-        console.log("thisProjectTodosRef().length", thisProjectTodosRef().length);
-        console.log("newTodos.length", newTodos.length);
+        const incompletedTodos = updatedTodos.projects[projectArrayNumber].tasks.filter((todo) => !todo.isCompleted);
+        const completedTodos = (updatedTodos.projects[projectArrayNumber].tasks.filter((todo) => todo.isCompleted)).length;
+        updatedTodos.projects[projectArrayNumber].tasks = incompletedTodos;
+        setAddCompletedTasks(completedTodos);
         setTodos(updatedTodos);
     }
 
