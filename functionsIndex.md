@@ -46,6 +46,7 @@
 - **getAllCompletedTasks()**:
 ---
 ### Projects
+- **getProjectArrayNumber( *projectId* )**:
 - **isThisProjectStarted( *projectId* )**:
 - **isThisProjectCompleted( *projectId* )**:
 - **updateProjectName( *projectId*, *newName*  )**:

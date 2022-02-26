@@ -5,7 +5,7 @@ import { InitialMessage } from "./components/InitialMessage";
 import jsonBase from "./structure_test.json"
 
 const KEY = "todoApp.todos1";
-// const currentProjectId = 1984;
+const currentProjectId = 1984;
 
 export function App() {
     const [todos, setTodos] = useState(
@@ -25,6 +25,20 @@ export function App() {
         localStorage.setItem(KEY, JSON.stringify(todos))
     }, [todos]);
 
+    const getProjectArrayNumber = (projectId) => {
+        // If the parameter 'projectId' is not entered in the function, it will take the 'currentProjectId' instead.
+        let idValidation = currentProjectId;
+        if (!!projectId) {
+            idValidation = projectId
+        }
+        const newTodos = {
+            ...todos
+        };
+        const project = newTodos.projects.find((project) => project.id === idValidation);
+        const projectArrayNumber = newTodos.projects.indexOf(project);
+        return projectArrayNumber
+    }
+
     const getPrevCompletedTasksNumber = () => {
         const todosCopy = {
             ...todos
@@ -32,7 +46,7 @@ export function App() {
         return todosCopy.credits.completedTasksCredits
     }
 
-    const setCompletedTasks = (completedTasksNumber) => {
+    const setAddCompletedTasks = (completedTasksNumber) => {
         const prevCompletedTasks = getPrevCompletedTasksNumber();
         const completedTasks = prevCompletedTasks + completedTasksNumber;
         setTodos((prevTodos) => {
@@ -48,13 +62,15 @@ export function App() {
         const newTodos = {
             ...todos
         };
-        const todo = newTodos.tasks.find((todo) => todo.id === id);
+        const todo = newTodos.projects[getProjectArrayNumber()].tasks.find((todo) => todo.id === id);
         todo.isCompleted = !todo.isCompleted;
         setTodos(newTodos);
 
     }
 
     const handleTodoAdd = () => {
+        console.log("todos inside handleTodoAdd ----------------->", todos);
+        // console.log("getProjectArrayNumber(): ",getProjectArrayNumber());
         const task = todoTaskRef.current.value;
         if (task === '') return;
 
@@ -62,8 +78,8 @@ export function App() {
             const updatedTodos = {
                 ...prevTodos
             };
-            const newTasks = [...updatedTodos.tasks, {id: uuidv4(), task, isCompleted: false}];
-            updatedTodos.tasks = newTasks;
+            const newTasks = [...updatedTodos.projects[getProjectArrayNumber()].tasks, {id: uuidv4(), task, isCompleted: false}];
+            updatedTodos.projects[getProjectArrayNumber()].tasks = newTasks;
             return updatedTodos
         })
 
@@ -71,14 +87,25 @@ export function App() {
     }
 
     const handleClearAll = () => {
+        const projectArrayNumber = getProjectArrayNumber();
         const updatedTodos = {
             ...todos
         };
-        const newTodos = updatedTodos.tasks.filter((todo) => !todo.isCompleted);
-        updatedTodos.tasks = newTodos;
-        const clearedNumber = todos.tasks.length - newTodos.length
-        setCompletedTasks(clearedNumber);
+        const newTodos = updatedTodos.projects[projectArrayNumber].tasks.filter((todo) => !todo.isCompleted);
+        updatedTodos.projects[projectArrayNumber].tasks = newTodos;
+        const oldTodos = todos.projects[0].tasks.length;
+        const clearedNumber = oldTodos - newTodos.length;
+        // const clearedNumber = thisProjectTodosRef().length - newTodos.length
+        setAddCompletedTasks(clearedNumber);
+        console.log("--------const clearedNumber = thisProjectTodosRef().length - newTodos.length--------: ", clearedNumber);
+        console.log("oldTodos: todos.projects[0].tasks.length", oldTodos);
+        console.log("thisProjectTodosRef().length", thisProjectTodosRef().length);
+        console.log("newTodos.length", newTodos.length);
         setTodos(updatedTodos);
+    }
+
+    const thisProjectTodosRef = () => {
+        return todos.projects[getProjectArrayNumber()].tasks
     }
 
     const _handleKeyDown = (e) => {
@@ -90,9 +117,9 @@ export function App() {
     return (
         <Fragment>
             <div>
-                <InitialMessage todos={todos.tasks} getPrevCompletedTasksNumber={getPrevCompletedTasksNumber}/>
+                <InitialMessage todos={thisProjectTodosRef()} getPrevCompletedTasksNumber={getPrevCompletedTasksNumber}/>
             </div>
-            <TodoList todos={todos.tasks} toggleTodo={toggleTodo}/>
+            <TodoList todos={thisProjectTodosRef()} toggleTodo={toggleTodo}/>
             <div className="new-task-bar">
                 <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" onKeyDown={_handleKeyDown}/>
                 <div className="handleButtons">

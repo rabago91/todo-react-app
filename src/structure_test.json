@@ -1,6 +1,6 @@
 {
     "userData": {
-        "id": "1991",
+        "id": 1991,
         "firstName": "user_first_name",
         "lastName": "user_last_name",
         "email": "user_email"
@@ -11,7 +11,7 @@
     },
     "tags": [
         {
-            "id": "1948",
+            "id": 1948,
             "name": "tag_name",
             "description": "tag_description",
             "creationDate": "creation_date",
@@ -20,7 +20,7 @@
     ],
     "selfRewardsItems": [
         {
-            "id": "1988",
+            "id": 1988,
             "name": "name",
             "copyOf": "original_reward_id",
             "description": "description",
@@ -38,16 +38,55 @@
     ],
     "customPhrases": [
         {
-            "id": "2000",
+            "id": 2000,
             "phrase": "más vale intentarlo que vivir con la duda.",
             "Author": "author"
         }
     ],
-    "tasks":[
+    "projects": [
         {
-            "id" : 1984,
-            "task": "Agrega tus propias tareas",
-            "isCompleted" : false
+            "name": "project_name",
+            "id": 1984,
+            "description": "project_description",
+            "trophy": {
+                "kind": 0,
+                "style": 0
+            },
+            "dates": {
+                "creation": "creation_date",
+                "due": "due_date",
+                "complete": [
+                    "completed_date"
+                ],
+                "restore": [
+                    "restored_date"
+                ]
+            },
+            "tasks": [
+                {
+                    "id" : 2022,
+                    "task": "Dentro del proyecto",
+                    "isCompleted" : false,
+                    "description": "task_description",
+                    "projectId": 1984,
+                    "tags": [
+                        {
+                            "tagId": "tag_id",
+                            "tagName": "tag_name"
+                        }
+                    ],
+                    "dates": {
+                        "creation": "creation_date",
+                        "due": "due_date",
+                        "complete": [
+                            "completed_date"
+                        ],
+                        "restore": [
+                            "restored_date"
+                        ]
+                    }
+                }
+            ]
         }
     ]
 }

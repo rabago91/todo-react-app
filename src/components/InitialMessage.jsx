@@ -2,12 +2,13 @@ import React from 'react';
 
 export function InitialMessage({ todos, getPrevCompletedTasksNumber }) {
 
-    const getMissingTodos = () => {
-        return todos.filter((todo) => !todo.completed).length;
+    const getMissingTodosNumber = () => {
+        const missingTodosObject = todos.filter((todo) => !todo.isCompleted);
+        return missingTodosObject.length
     }
 
     const textMessageValidation = () => {
-        const missingTodosNumber = getMissingTodos();
+        const missingTodosNumber = getMissingTodosNumber();
         if (missingTodosNumber === 0) {
             const icon = <span role="img" aria-label="glasses"> 🕶</span>
             return <>No tienes tareas pendientes! {icon}</>
